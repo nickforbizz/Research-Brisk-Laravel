@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $status
  * @property string $created_at
  * @property string $updated_at
+ * @property User $user
  */
 class PaperPrice extends Model
 {
@@ -24,10 +25,10 @@ class PaperPrice extends Model
     protected $fillable = ['user_id', 'name', 'price', 'pages', 'description', 'archived', 'status', 'created_at', 'updated_at'];
 
     /**
-     * The connection name for the model.
-     * 
-     * @var string
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    protected $connection = 'mysql';
-
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

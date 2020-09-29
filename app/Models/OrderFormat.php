@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $created_at
  * @property string $updated_at
  * @property string $deleted_at
+ * @property GuestOrder[] $guestOrders
+ * @property Order[] $orders
  */
 class OrderFormat extends Model
 {
@@ -25,10 +27,18 @@ class OrderFormat extends Model
     protected $fillable = ['user_id', 'name', 'description', 'remember_token', 'active', 'archived', 'status', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
-     * The connection name for the model.
-     * 
-     * @var string
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    protected $connection = 'mysql';
+    public function guestOrders()
+    {
+        return $this->hasMany('App\Models\GuestOrder');
+    }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order');
+    }
 }

@@ -39,11 +39,14 @@ Route::get('/get_order_format/{id}', 'Orders\orderFormatController@show')->name(
 Route::get('/fetch_order_langs', 'Orders\orderLangController@index')->name('orderLangs');
 Route::get('/get_order_lang/{id}', 'Orders\orderLangController@show')->name('orderLang');
 
-// order
+// order prices
 Route::get('/fetch_order_prices', 'Orders\orderPricingController@index')->name('orderPrices');
 Route::get('/get_order_price/{id}', 'Orders\orderPricingController@show')->name('orderPrice');
 
 Route::get('/order_miscs', 'Orders\orderController@miscs')->name('orderMiscs');
+
+Route::get('/get_guest_orders', 'Orders\orderController@index_guest')->name('fetchGuestOrders');
+Route::post('/post_guest_order', 'Orders\orderController@store_guest')->name('createGuestOrder');
 
 
 // ******************** BLOGS *************************************************
@@ -93,6 +96,7 @@ Route::middleware('auth:api')->group(function (){
     Route::post('/patchOrder/{id}', 'Orders\orderController@update')->name('updateOrder');
     Route::post('/delOrder/{id}', 'Orders\orderController@destroy')->name('delOrder');
 
+    
     
 
 

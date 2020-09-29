@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $media_link
  * @property string $media_name
  * @property string $media_type
+ * @property string $jobs
  * @property int $archived
  * @property int $status
  * @property string $created_at
@@ -28,7 +29,7 @@ class Blog extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'blog_category_id', 'rowid', 'title', 'description', 'body', 'media_link', 'media_name', 'media_type', 'archived', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'blog_category_id', 'rowid', 'title', 'description', 'body', 'media_link', 'media_name', 'media_type', 'jobs', 'archived', 'status', 'created_at', 'updated_at'];
 
     /**
      * The connection name for the model.

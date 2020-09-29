@@ -99,7 +99,9 @@ class orderPricingController extends Controller
      */
     public function show($id)
     {
-        return PaperPrice::find($id);
+        $data =  PaperPrice::find($id);
+        // $data->user;
+        return $data;
     }
 
     /**
