@@ -7,6 +7,15 @@
 </head>
 <body>
     <h4>Hello and Welcome to Research Brisk</h4>
-    <p>We have received your request with the attached files, we will get back to you for more info</p>
+    <p>You have received a new Enquiry,</p> <hr>
+
+    <div>
+    <h5>About</h5>
+    <p>{{ $request->message }}</p>
+    <p>By: <i> {{ $request->email }} </i></p>
+    </div>
+
+
+
 </body>
 </html>

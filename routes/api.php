@@ -64,6 +64,11 @@ Route::get('/fetch_blog_comments', 'Blogs\blogCommentController@index')->name('b
 Route::get('/get_blog_comment/{id}', 'Blogs\blogCommentController@show')->name('blogComment');
 Route::post('/post_blog_comment', 'Blogs\blogCommentController@store')->name('createBlogComment');
 
+// user Enquiry
+Route::get('/fetch_enquiry', 'Feedback\userInfoController@index')->name('Enquiries');
+Route::get('/get_enquiry/{id}', 'Feedback\userInfoController@show')->name('Enquiry');
+Route::post('/post_enquiry', 'Feedback\userInfoController@store')->name('createBlogComment');
+
 
 
 Route::middleware('auth:api')->group(function (){
@@ -95,6 +100,11 @@ Route::middleware('auth:api')->group(function (){
     Route::post('/post_order', 'Orders\orderController@store')->name('createOrder');
     Route::post('/patchOrder/{id}', 'Orders\orderController@update')->name('updateOrder');
     Route::post('/delOrder/{id}', 'Orders\orderController@destroy')->name('delOrder');
+
+    // Enquiry
+    Route::post('/patchEnquiry/{id}', 'Feedback\userInfoController@update')->name('updateEnquiry');
+    Route::post('/delEnquiry/{id}', 'Feedback\userInfoController@destroy')->name('delEnquiry');
+
 
     
     

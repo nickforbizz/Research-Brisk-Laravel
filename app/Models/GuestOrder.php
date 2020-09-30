@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $email
  * @property string $pages
  * @property string $wordcount
+ * @property string $duedate
  * @property string $notes
  * @property string $description
  * @property int $status
@@ -29,7 +30,7 @@ class GuestOrder extends Model
     /**
      * @var array
      */
-    protected $fillable = ['order_category_id', 'order_format_id', 'order_language_id', 'title', 'email', 'pages', 'wordcount', 'notes', 'description', 'status', 'archived', 'created_at', 'updated_at'];
+    protected $fillable = ['order_category_id', 'order_format_id', 'order_language_id', 'title', 'email', 'pages', 'wordcount', 'duedate', 'notes', 'description', 'status', 'archived', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

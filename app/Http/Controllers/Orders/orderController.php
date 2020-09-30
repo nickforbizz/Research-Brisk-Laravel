@@ -11,6 +11,7 @@ use App\Models\OrderDoc;
 use App\Models\OrderFormat;
 use App\Models\OrderLanguage;
 use App\Models\PaperPrice;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -106,6 +107,7 @@ class orderController extends Controller
                 "user_id" => $user->id,
                 "title" => $request->title,
                 "email" => $request->email,
+                "duedate" => Carbon::parse($request->duedate),
                 "pages" => $request->pages,
                 "wordcount" => $request->wordcount,
                 "description" => $request->description,
@@ -128,6 +130,28 @@ class orderController extends Controller
                             'extension' => $doc->getClientOriginalExtension(),
                         ]);
                     }
+
+
+                    $maildata = array('name' => "ResearchBrisk Team", 'request' => $request);
+
+                    Mail::send('order_feedback_mail', $maildata, function ($message) use ($request) {
+                        $message->to($request->email, 'Placement of the Order')->subject('Placement of the Order');
+                        $message->from('support@researchbrisk.com', 'Sir Benjamin');
+                    });
+
+
+
+                    Mail::send('order_mail', $maildata, function ($message) use ($request) {
+                        $message->to('support@researchbrisk.com', 'Placement of the Order')->subject('Placement of the Order');
+
+                        foreach ($request->file('file') as $doc) {
+                            $message->attach($doc, [
+                                'as' => $doc->getClientOriginalName(),
+                                'mime' => $doc->getClientMimeType(),
+                            ]);
+                        }
+                        $message->from($request->email, 'ResearchBrisk Team');
+                    });
 
                     DB::commit();
 
@@ -189,6 +213,7 @@ class orderController extends Controller
                 "title" => $request->title,
                 "email" => $request->email,
                 "pages" => $request->pages,
+                "duedate" => Carbon::parse($request->duedate),
                 "wordcount" => $request->wordcount,
                 "description" => $request->description,
                 "order_category_id" => $request->order_category_id,
@@ -211,16 +236,16 @@ class orderController extends Controller
                         ]);
                     }
 
-                    $maildata = array('name' => "ResearchBrisk Team");
+                    $maildata = array('name' => "ResearchBrisk Team", 'request' => $request);
 
-                    Mail::send('feedback_mail', $maildata, function ($message) use ($request) {
+                    Mail::send('order_feedback_mail', $maildata, function ($message) use ($request) {
                         $message->to($request->email, 'Placement of the Order')->subject('Placement of the Order');
                         $message->from('support@researchbrisk.com', 'Sir Benjamin');
                     });
 
 
 
-                    Mail::send('mail', $maildata, function ($message) use ($request) {
+                    Mail::send('order_mail', $maildata, function ($message) use ($request) {
                         $message->to('support@researchbrisk.com', 'Placement of the Order')->subject('Placement of the Order');
 
                         foreach ($request->file('file') as $doc) {

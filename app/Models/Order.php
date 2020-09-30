@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $email
  * @property string $pages
  * @property string $wordcount
+ * @property string $duedate
  * @property string $notes
  * @property string $description
  * @property int $status
@@ -30,14 +31,7 @@ class Order extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'order_category_id', 'order_format_id', 'order_language_id', 'title', 'email', 'pages', 'wordcount', 'notes', 'description', 'status', 'archived', 'created_at', 'updated_at'];
-
-    /**
-     * The connection name for the model.
-     * 
-     * @var string
-     */
-    protected $connection = 'mysql';
+    protected $fillable = ['user_id', 'order_category_id', 'order_format_id', 'order_language_id', 'title', 'email', 'pages', 'wordcount', 'duedate', 'notes', 'description', 'status', 'archived', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
